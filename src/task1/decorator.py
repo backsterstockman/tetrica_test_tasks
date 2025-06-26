@@ -12,14 +12,11 @@ def strict(func):
         arguments = func_signature.bind(*args, **kwargs).arguments
         print(arguments)
         result = func(*args, **kwargs)
-        try:
-            for key, value in arguments.items():
-                if type(value) is annotations[key]:
-                    continue
-                else:
-                    raise ValueError('Типы параметров, переданных в ф-ию, не соответствуют ожидаемым')
-        except ValueError as e:
-            print(e)
+        for key, value in arguments.items():
+            if type(value) is annotations[key]:
+                continue
+            else:
+                raise TypeError('Типы параметров, переданных в ф-ию, не соответствуют ожидаемым')
         return result
     return wrapper
 
