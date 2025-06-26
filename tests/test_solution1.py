@@ -1,5 +1,5 @@
 import pytest
-from src.task1.decorator import func1, func2, func3, func4
+from src.task1.solution import func1, func2, func3, func4
 
 
 @pytest.mark.parametrize(
