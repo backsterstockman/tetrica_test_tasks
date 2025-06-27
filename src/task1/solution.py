@@ -39,3 +39,8 @@ def func3(argFloat: float):
 @strict
 def func4(argStr: str):
     return argStr
+
+
+if __name__ == '__main__':
+    func1(1)
+    func1('')
