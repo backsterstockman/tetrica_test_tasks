@@ -3,6 +3,7 @@ from collections import Counter
 import requests
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin
+import os
 
 BASE_URL = "https://ru.wikipedia.org"
 START_URL = BASE_URL + "/w/index.php?title=Категория:Животные_по_алфавиту&from=А"
@@ -30,7 +31,9 @@ def get_data_from_site() -> list[dict]:
     return [{"letter": L, "count": counts[L]} for L in sorted(counts)]
 
 
-def write_data(path: str, data: list[dict]):
+def write_data(filename: str, data: list[dict]):
+    this_dir = os.path.dirname(__file__)
+    path = os.path.join(this_dir, filename)
     with open(path, "w", encoding="utf-8", newline="") as f:
         writer = csv.DictWriter(f, fieldnames=["letter", "count"])
         writer.writeheader()
@@ -39,4 +42,4 @@ def write_data(path: str, data: list[dict]):
 
 if __name__ == "__main__":
     data = get_data_from_site()
-    write_data("animals_by_letter.csv", data)
+    write_data("beasts.csv", data)
